@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -22,7 +23,8 @@ import { VerComentarioComponent } from './components/ver-comentario/ver-comentar
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule//Se utiliza para formularios
+    ReactiveFormsModule,//Se utiliza para formularios
+    HttpClientModule//Hacer peticiones http hacia el backend
   ],
   providers: [],
   bootstrap: [AppComponent]
