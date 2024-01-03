@@ -8,10 +8,8 @@ import { ComentarioService } from 'src/app/services/comentario.service';
   styleUrls: ['./list-comentarios.component.css']
 })
 export class ListComentariosComponent {
-listComentarios: Comentario[]=[
-  { titulo:'Angular', creador:'Fernando', fechaCreacion: new Date(), texto:"Framework para crear SPA" },
-  { titulo:'React', creador:'Miguel', fechaCreacion: new Date(), texto:"Librería para crear SPA" }
-]
+
+  listComentarios: Comentario[]=[];
 
 constructor(private _comentarioService: ComentarioService){ }
 
@@ -21,10 +19,20 @@ ngOnInit(): void{
 
 getComentarios(){
   this._comentarioService.getListComentarios().subscribe(data => {
-    console.log(data);
+    //console.log(data);
+    this.listComentarios = data;
   }, error =>{
     console.log(error);
   })
 }
+
+eliminarComentario(id: any) {//tambien se puede hacer asi (id: number | undefined)
+  console.log(id);
+  this._comentarioService.deleteComentario(id).subscribe(data => {
+    this.getComentarios();
+  }, error =>{
+    console.log(error);
+  })
+  }
 
 }
