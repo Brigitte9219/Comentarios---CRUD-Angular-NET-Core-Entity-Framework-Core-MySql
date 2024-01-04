@@ -21,7 +21,7 @@ export class ComentarioService {
     return this.http.delete(this.myAppUrl+this.myApiUrl+id);
   }
 
-  getComentario(id: number){
+  getComentario(id: number): Observable<any>{
   return this.http.get(this.myAppUrl+this.myApiUrl+id);
   }
 
