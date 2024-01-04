@@ -37,6 +37,7 @@ export class AgregarEditarComentarioComponent {
     this.accion = 'Editar';
     this._comentarioService.getComentario(this.id).subscribe(data => {
       console.log(data);
+      this.comentario = data;
       this.agregarComentario.patchValue({
         titulo: data.titulo,
         texto: data.texto,
@@ -48,10 +49,11 @@ export class AgregarEditarComentarioComponent {
   }
   }
 
-  agregar(){
-    console.log(this.agregarComentario);
+  agregarEditarComentario(){
+  console.log(this.agregarComentario);
 
-    //Acceder a los valores del formulario AgregarComentario
+  if(this.comentario == undefined){
+  //Agregamos un nuevo comentario
   const comentario: Comentario = {
     titulo: this.agregarComentario.get('titulo')?.value,
     creador: this.agregarComentario.get('creador')?.value,
@@ -64,5 +66,20 @@ export class AgregarEditarComentarioComponent {
   }, error => {
     console.log(error);
   })
+  }else{
+  //Editamos comentario
+  const comentario: Comentario = {
+    id: this.comentario.id,
+    titulo: this.agregarComentario.get('titulo')?.value,
+    creador: this.agregarComentario.get('creador')?.value,
+    texto: this.agregarComentario.get('texto')?.value,
+    fechaCreacion: this.comentario.fechaCreacion
   }
+  this._comentarioService.updateComentario(this.id, comentario).subscribe(data => {
+    this.router.navigate(['/']);
+  }, error => {
+    console.log(error);
+  })
+}
+}
 }
